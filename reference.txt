@@ -1,0 +1,5 @@
+https://mapzen.com/data/metro-extracts/  (Mapzen)
+https://www.openstreetmap.org/export#map=12/-35.2725/149.1226 (OpenStreetMap Canberra)
+https://docs.mongodb.org/manual/ (MongoDB Manual)
+https://docs.mongodb.org/getting-started/python/introduction/ (Getting Started with MongoDB)
+http://stackoverflow.com/questions/20329896/python-2-7-character-u2013 (Issue with \u2013 error)
