@@ -52,33 +52,17 @@ def get_unique_address_attribute_values(filename, attribute_name):
 
 # Used to parse irregular street names
 def parse_street_name(street_name):
-    #If there is a comma
     if(',' in street_name):
         street_name_candidates = street_name.split(',')
+        #Between two candidates, selects one that contains the expected street type
         for street_name in street_name_candidates:
             if(any(str_type in street_name for str_type in expected_street_types)):
                 return street_name
     elif('&' in street_name):
-        #These types of streets usually are intersected to each other. I will pick the main road (the later one).
+        #These types of streets usually are intersecting to each other. Chose the main road (the later one).
         return street_name.split('&')[1]
 
     return street_name
-
-# Used to audit street types and name (this is done before converting XML to JSON and used to examine XML files)
-def audit_street_type(street_types, street_name):
-    street_name = parse_street_name(street_name)
-    m = street_type_re.search(street_name)
-    if m:
-        street_type = m.group()
-        #Get rid of abbreviations
-        street_type = update_name(street_type, mapping)
-        if street_type in expected_street_types:
-            street_types[street_type].add(street_name)
-        elif street_type not in expected_street_types:
-            for str_type in expected_street_types:
-                if str_type in street_name:
-                    str_index = street_name.find(str_type)
-                    street_types[str_type].add(street_name[:str_index + len(str_type)])
 
 # Used to audit street name
 def audit_street_name(street_name):

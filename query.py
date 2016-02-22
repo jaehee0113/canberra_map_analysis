@@ -30,7 +30,7 @@ def prettify_basic_statistics(given_amount, total_amount, round_off = 2):
 	return str(given_amount) + " / " + str(total_amount) + " (" + str(round(float(given_amount) / float(total_amount) * 100, round_off)) + "%)"
 
 if __name__ == "__main__":
-    db = get_db('openstreet_fake')
+    db = get_db('openstreet')
 
     #================================
     #	Basic Properties
@@ -121,11 +121,13 @@ if __name__ == "__main__":
     								  {"$limit" : 30}]))
     prettify_list(common_time)
 
+    # Documents created between 2014 and 2016-02-20
     time_query = { "created.timestamp" : {"$gte": '2014-01-01T00:00:00Z', "$lte": '2016-02-20T00:00:00Z'}}
     time_projection = {"_id" : 0, "created.uid" : 1}
     specific_time_nodes = db.canberra.find(time_query, time_projection).count()
     print "# of up-to-date documents: " + prettify_basic_statistics(specific_time_nodes, total_documents)
 
+    # Documents created before 2014-01-01
     time_query = { "created.timestamp" : {"$lt": '2014-01-01T00:00:00Z'}}
     specific_time_nodes = db.canberra.find(time_query, time_projection).count()
     print "# of outdated documents: " + prettify_basic_statistics(specific_time_nodes, total_documents)

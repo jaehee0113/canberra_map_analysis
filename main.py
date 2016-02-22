@@ -123,8 +123,8 @@ def run():
     #unique_streets = MW.get_unique_address_attribute_values(FILENAME, 'street')
     
     #Conversion
-    #my_data = convert_to_json(FILENAME, True)
-    #print my_data
+    result = convert_to_json(FILENAME, True)
+    print result
     
 if __name__ == "__main__":
     run()
